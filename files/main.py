@@ -5,20 +5,20 @@ import os
 import zipfile
 
 
-zip_path = os.path.basename("data.zip")
-cache_path = os.path.basename("cache")
+zip_path = os.path.join(os.getcwd(),os.path.basename("data.zip"))
+cache_path = os.path.join(os.getcwd(),os.path.basename("cache"))
 
+print(cache_path)
 
 def clean_cache():
-    folder = "cache"
-    if os.path.exists(folder):
-        if len(os.listdir(folder)) > 0:
-            for file in os.listdir(folder):
-                os.remove(folder + "/" + file)
+    
+    if os.path.exists(cache_path):
+        if len(os.listdir(cache_path)) > 0:
+            for file in os.listdir(cache_path):
+                file_path = os.path.join(cache_path, file)
+                os.remove(file_path)
     else:
-        parent_dir = os.getcwd()
-        path = os.path.join(parent_dir, folder)
-        os.mkdir(path)
+        os.mkdir(cache_path)
 
 
 def cache_zip(zip, cache):
@@ -27,14 +27,11 @@ def cache_zip(zip, cache):
 
 
 def cached_files():
-    folder = "cache"
-    parent_dir = os.getcwd()
-    path = os.path.join(parent_dir, folder)
     list_of_paths = []
-    if os.path.exists(path):
-        for file in os.listdir(path):
-            if os.path.isfile(os.path.join(path, file)):
-                list_of_paths.append(os.path.abspath(path + "/" + file))
+    if os.path.exists(cache_path):
+        for file in os.listdir(cache_path):
+            if os.path.isfile(os.path.join(cache_path, file)):
+                list_of_paths.append(os.path.abspath(os.path.join(cache_path , file)))
     return list_of_paths
 
 
@@ -48,10 +45,9 @@ def find_password(path_list):
         return "No password was found!"
 
 
-os.chdir("C:/Users/Bernard/Desktop/Winc_Academy/vscode/Back-end/files")
-
 
 clean_cache()
 cache_zip(zip_path, cache_path)
 cached_files()
-print(find_password(cached_files()))
+find_password(cached_files())
+
