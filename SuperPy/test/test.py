@@ -18,7 +18,9 @@ import datetime
 # #     'task', help="what would you like to see [revenue, inventory, profit]")
 # # parser.add_argument('-time', '--time', help="what date would you like to see")
 
-# # problem: make argparse argument only requierd if previous argument was called
+
+# # Rishaan: misschien kun je ook helpen met dit andere probleem
+# # problem: make argparse argument only requierd if previous argument was called 
 
 # group = parser.add_mutually_exclusive_group()
 # group.add_argument('-buy', '--buy', action='store_true',
